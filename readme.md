@@ -1,4 +1,4 @@
-# Xxx
+# IntervalConvertor
 
 This code repository contains the following three tools：
 
@@ -17,17 +17,17 @@ This code repository contains the following three tools：
 Some input files of the tools are generated using minigraph，therefore, minigraph needs to be installed first.
 
 ```bash
-git clone https://github.com/CGotw/IntervalConvertor.git
+git clone https://github.com/lh3/minigraph
 cd minigraph && make
 ```
 
-Running environment required to use the **conda** installer. 
+Running environment required to use the **conda** installer.
 
 ```bash
 # The following commands install ”xxx“ in a new conda environment called `xxx`
-conda create -n IntervalConvertor python=3.9
-conda activate IntervalConvertor
-git clone git@github.com:CGotw/test_cau_tools.git
+conda create -n intervalConvertor python=3.9
+conda activate intervalConvertor
+git clone https://github.com/CGotw/IntervalConvertor.git
 cd IntervalConvertor
 pip install -r requirements.txt
 ```
@@ -69,7 +69,7 @@ Six required parameters need to be set when running Species Passing Information�
 **Run command**
 
 ```bash
-python "jingguowuzhong.py" \
+python "species passing information.py" \
     --gaf_dir "your_gaf_dir" \
     --gfa_path "your_gfa_path" \
     --interval_conversion True \
