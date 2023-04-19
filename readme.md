@@ -43,6 +43,7 @@ Five required parameters need to be set when running Interval Conversion：
 - query\_input\_path：A list file, containing the chromosome ID , the start and end location and line number of each fragment.
 - query\_gaf\_path：The gaf file created with the query genome and the pan-genome graph file, including at least the reference and query genomes.
 - output\_file\_path：Save the result of the Interval Conversionl.
+- reference_name: The reference genome name for GFA File.
 
 **Run command**
 
@@ -53,6 +54,7 @@ python "interval conversion.py" \
     --query_input_path "your_query_input_path" \
     --query_gaf_path "your_query_gaf_path" \
     --output_file_path "your_output_file_path" \
+    --reference_name "reference_name"
 ```
 
 ### 2. Species Passing Information
@@ -98,4 +100,4 @@ python "SV calling.py" \
    
 ```
 
-*last update:  1/27/2023*
+*last update:  4/19/2023*

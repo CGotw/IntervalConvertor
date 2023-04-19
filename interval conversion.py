@@ -41,6 +41,8 @@ def interval_conversion(args):
     gaf_dir=args.gaf_dir
     gfa_path=args.gfa_path
     g1 = gfa.from_file(gfa_path)
+    reference_name=args.reference_name
+    reference_name_len=len(reference_name)
 
     allgaf = []
     all_file_name = set()
@@ -68,6 +70,8 @@ def interval_conversion(args):
 
     all_node = []
     for line in tqdm(allgaf):
+        print(line)
+
         if len(line) == 1:
             all_node.append([line[0][:-4]])
             continue
@@ -81,7 +85,7 @@ def interval_conversion(args):
             tmp = p.split(':')
             name = tmp[0]
             pre_name = name.split('_')[0]
-            if pre_name != 'Fuji':
+            if pre_name != reference_name:
                 continue
             [start,end] = tmp[1].split('-')
             if name in res_dict:
@@ -90,7 +94,7 @@ def interval_conversion(args):
                 res_dict[name]=[(start,end)]
         all_node[-1][-1].append(res_dict)
 
-
+    print(all_node)
     # 调试用
     # f = open('/data/lilab/sywang1/dierpian/Fuji_0/Fuji_0.gaf', 'r') # 因为是从gd转换坐标，所以要用gd的gaf信息，而不是all_gaf
     # f = open('/data/lilab/sywang1/dierpian/unPhased_gaf/M9_0.gaf', 'r')
@@ -129,7 +133,7 @@ def interval_conversion(args):
                 map_res = re.split('[><]',line[5])[1:]
                 mat2 = "{:<20}\t{:20}{:20}"
                 if map_res == []:
-                    if line[5][:4]!= 'Fuji':
+                    if line[5][:reference_name_len]!= reference_name:
                         pass
                     else:
                         f.write(mat2.format(line[5],real_start,real_end))
@@ -147,7 +151,7 @@ def interval_conversion(args):
                     tmp_s,tmp_e = get_intersection(pre_len,tmp_len,real_start,real_end)
                     if tmp_s == -1:
                         continue
-                    if n[:4]== 'Fuji':
+                    if n[:reference_name_len]== reference_name:
                         f.write(mat2.format(n,tmp_s-pre_len+s,tmp_e-pre_len+s))
                         f.write('\n')
                 f.write('---------------------------')
@@ -163,7 +167,8 @@ if __name__ == "__main__":
     parser.add_argument('--gfa_path', type=str,help='query input')
     parser.add_argument('--query_input_path', type=str,help='query input path')
     parser.add_argument('--query_gaf_path', type=str,help='query gaf path')
-    parser.add_argument('--output_file_path', type=str,help='output file path')    
+    parser.add_argument('--output_file_path', type=str,help='output file path')
+    parser.add_argument('--reference_name', type=str,help='reference name')    
     args = parser.parse_args()
     interval_conversion(args=args)
 
