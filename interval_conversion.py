@@ -3,18 +3,6 @@ from tqdm import tqdm
 from openpyxl.styles import PatternFill
 import argparse
 
-def find_node(chr_name,start,end):
-    start,end = int(start), int(end)
-    targets = []
-    for node in node_dict[chr_name]:
-        s,e = node[0],node[1]
-        if e<=start:
-            continue
-        if s>=end:
-            break
-        else:
-            targets.append(node[-1])
-    return targets
 
 def get_intersection(a,b,c,d):
     if (a-c)*(d-b)>=0:
@@ -30,61 +18,10 @@ def get_intersection(a,b,c,d):
         return -1,-1
 
 def interval_conversion(args):
-    gfa = gfapy.Gfa() 
-    gaf_dir=args.gaf_dir
-    gfa_path=args.gfa_path
-    g1 = gfa.from_file(gfa_path)
     reference_name=args.reference_name
     reference_name_len=len(reference_name)
 
-    allgaf = []
-    all_file_name = set()
-    for file in tqdm(os.listdir(gaf_dir)):
-        if os.path.isdir(gaf_dir+file):
-            continue
-        all_file_name.add(file.split('.')[0])
-        f = open(gaf_dir+file, 'r')
-        allgaf.extend([[file]]+f.readlines())
-        f.close()
 
-    node_dict = dict()
-    for name in tqdm(g1.names):
-        s = g1.line(name)
-        SN = s.SN
-        LN = s.LN
-        SO = s.SO
-        if SN in node_dict:
-            node_dict[SN].append((SO,SO+LN,name))
-        else:
-            node_dict[SN] = [(SO,SO+LN,name)]
-
-    all_node = []
-    for line in tqdm(allgaf):
-        #print(line)
-
-        if len(line) == 1:
-            all_node.append([line[0][:-4]])
-            continue
-        line = line.rstrip('\n').split('\t')
-        map_res = re.split('[><]',line[5])[1:]
-        if map_res == []:
-            continue
-        all_node[-1].append([line[0]])
-        res_dict = dict()
-        for p in map_res:
-            tmp = p.split(':')
-            name = tmp[0]
-            pre_name = name.split('_')[0]
-            if pre_name != reference_name:
-                continue
-            [start,end] = tmp[1].split('-')
-            if name in res_dict:
-                res_dict[name].append((start,end))
-            else:
-                res_dict[name]=[(start,end)]
-        all_node[-1][-1].append(res_dict)
-
-    #print(all_node)
     f=open(args.query_gaf_path,'r')
     gd_gaf = f.readlines()
     f.close()
@@ -140,8 +77,6 @@ def interval_conversion(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='input parameters')
-    parser.add_argument('--gaf_dir', type=str,help ='gaf directory', required=True)
-    parser.add_argument('--gfa_path', type=str,help='query input', required=True)
     parser.add_argument('--query_input_path', type=str,help='query input path', required=True)
     parser.add_argument('--query_gaf_path', type=str,help='query gaf path', required=True)
     parser.add_argument('--reference_name', type=str,help='reference name', required=True)    
