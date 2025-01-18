@@ -14,7 +14,7 @@ cd minigraph && make
 Running environment required to use the **conda** installer.
 
 ```bash
-# The following commands installconda create -n intervalconvertor python=3.9conda activate intervalconvertor "Intervalconvertor" in a new conda environment called intervalconvertor
+#  The following commands install "Intervalconvertor" in a new conda environment called intervalconvertor
 
 conda create -n intervalConvertor python=3.9
 conda activate intervalConvertor
