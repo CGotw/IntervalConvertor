@@ -30,7 +30,7 @@ def interval_conversion(args):
     gene = fin.readlines()
     fin.close()
 
-    outmapfile="../results/map.out.txt"
+    outmapfile=args.output_file_path
     print(outmapfile)
     f = open(outmapfile, 'w')
     for g in tqdm(gene):
@@ -80,5 +80,6 @@ if __name__ == "__main__":
     parser.add_argument('--query_input_path', type=str,help='query input path', required=True)
     parser.add_argument('--query_gaf_path', type=str,help='query gaf path', required=True)
     parser.add_argument('--reference_name', type=str,help='reference name', required=True)    
+    parser.add_argument('--output_file_path', type=str,help='output file path', required=True) 
     args = parser.parse_args()
     interval_conversion(args=args)
