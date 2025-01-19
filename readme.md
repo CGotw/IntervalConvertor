@@ -15,7 +15,6 @@ Running environment required to use the **conda** installer.
 
 ```bash
 #  The following commands install "Intervalconvertor" in a new conda environment called intervalconvertor
-
 conda create -n intervalConvertor python=3.9
 conda activate intervalConvertor
 git clone https://github.com/CGotw/IntervalConvertor.git
@@ -30,18 +29,18 @@ pip install -r requirements.txt
 Four required parameters need to be set when running Interval Conversion：
 
 - query\_input\_path：The loci chosen in the test genome.
-- query\_gaf\_path：Graph alignment file between the test genome and the reference genome.
+- query\_gaf\_path：The alignment path between the query and reference genomes based on the pangenome graph.
 - output\_file\_path：Save the result of the Interval Conversion.
 - reference_name: Reference genome name.
 
 **Run command**
 
 ```bash
-python "interval conversion.py" \
+python "interval_conversion.py" \
     --query_input_path "your_query_input_path" \
     --query_gaf_path "your_query_gaf_path" \
     --output_file_path "your_output_file_path" \
     --reference_name "reference_name"
 ```
 
-*last update:  4/19/2023*
+*last update:  1/19/2025*
