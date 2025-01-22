@@ -24,23 +24,21 @@ pip install -r requirements.txt
 
 ## Usage
 
-### 1. Interval Conversion
+Four required parameters need to be set when running IntervalConvertor：
 
-Four required parameters need to be set when running Interval Conversion：
-
-- query\_input\_path：The loci chosen in the test genome.
+- query\_input\_path：The loci chosen in the query genome.
 - query\_gaf\_path：The alignment path between the query and reference genomes based on the pangenome graph.
-- output\_file\_path：Save the result of the Interval Conversion.
+- output\_file\_path：Save the result of the IntervalConvertor.
 - reference_name: Reference genome name.
 
 **Run command**
 
 ```bash
-python "interval_conversion.py" \
+python "intervalconvertor.py" \
     --query_input_path "your_query_input_path" \
     --query_gaf_path "your_query_gaf_path" \
     --output_file_path "your_output_file_path" \
     --reference_name "reference_name"
 ```
 
-*last update:  1/19/2025*
+*last update:  1/22/2025*
